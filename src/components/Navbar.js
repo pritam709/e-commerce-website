@@ -1,18 +1,20 @@
-import React,{useState} from 'react';
+import React ,{useContext} from 'react';
 
 import Container from 'react-bootstrap/Container';
 
 import Navbar from 'react-bootstrap/Navbar';
 
 import Button from 'react-bootstrap/Button';
-import Cart from './Cart';
+import CartContext from '../store/CartContext';
 
-function NavbarFn() {
-    const [showCart,setShowCart]=useState(true);
-    const showCartHandler=()=>{
-        console.log("btn click");
-        setShowCart(true);
-    }
+
+function NavbarFn(props) {
+  const ctx= useContext(CartContext);
+
+  const totalItems=ctx.items.reduce((curr,item)=>{
+    return curr+item.quantity;
+  },0)
+    
 
   
     return (
@@ -23,14 +25,14 @@ function NavbarFn() {
            <Navbar.Brand   className="text-white" href="#home">About</Navbar.Brand>
         
          
-          <Button onClick={showCartHandler} type="submit" className="bg-dark">Cart 0</Button>
+          <Button onClick={props.showCartHandler} type="submit" className="bg-dark">Cart {totalItems}</Button>
          
        
            
          
        </Container>
      </Navbar>
-      {showCart && <Cart />}</>
+     </>
       )
   
 }

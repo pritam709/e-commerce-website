@@ -1,0 +1,30 @@
+.item{
+ display:flex;
+ justify-content:space-between;
+ font-weight: bold;
+  font-size: 1rem;
+  border-bottom:2px solid black;
+  padding-bottom:0.75rem;
+  margin-top:1.5rem;
+  align-items:center
+}
+.item div{
+    /* background-color:red; */
+    margin-left:1rem;
+    max-width:4.5rem;
+
+}
+.item button{
+    max-height:2.5rem;
+    margin-left :
+}
+.title{
+
+}
+.price{
+    padding-right:rem;
+
+}
+.quantity{
+    padding-left:5rem;
+}

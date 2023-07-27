@@ -1,18 +1,23 @@
+import React,{useContext} from 'react';
 import Button from 'react-bootstrap/Button';
 import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Container from 'react-bootstrap/Container';
+import CartContext from '../store/CartContext';
+
 const productsArr = [
   {
+    id:"p1",
     title: "Album 1",
 
-    price: 100,
+    price: 80,
 
     imageUrl: "https://prasadyash2411.github.io/ecom-website/img/Album%201.png",
   },
 
   {
+    id:"p2",
     title: "Album 2",
 
     price: 50,
@@ -21,6 +26,7 @@ const productsArr = [
   },
 
   {
+    id:"p3",
     title: "Album 3",
 
     price: 70,
@@ -29,6 +35,7 @@ const productsArr = [
   },
 
   {
+    id:"p4",
     title: "Album 4",
 
     price: 100,
@@ -38,6 +45,16 @@ const productsArr = [
 ];
 
 const Music = () => {
+ const ctx= useContext(CartContext);
+ const addItemTocart=(item)=>{
+
+  console.log("btn-click");
+
+  console.log({...item,quantity:1});
+
+  ctx.addItemTocart({...item,quantity:1})
+
+ }
   return (
     <>
       <div>
@@ -59,7 +76,7 @@ const Music = () => {
               <Card.Body>
                 <Card.Text>
                  $ {item.price} 
-                  <Button> Add to Cart</Button>
+                  <Button onClick={addItemTocart.bind(null,item)}> Add to Cart</Button>
                 </Card.Text>
               </Card.Body>
             </Card>

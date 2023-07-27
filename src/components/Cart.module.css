@@ -2,18 +2,20 @@
   position: fixed;
   top: 8vh;
   right: 0.5%;
-  max-width: 30rem;
+  width: 28rem;
   background-color: white;
   padding: 1rem;
   border-radius: 10px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
   z-index: 10;
+  overflow:scroll;
+  max-height:90vh;
 }
 .cart span {
   font-weight: bold;
   border-bottom: 2px solid black;
   padding-bottom: 0.5rem;
-  margin: 2rem;
+  margin: 2.5rem;
 }
 
 .btnX {
@@ -55,4 +57,9 @@
 .total{
     margin-top:1.5rem;
     margin-left:15rem
+}
+.list{
+    list-style:none;
+    
+    
 }
