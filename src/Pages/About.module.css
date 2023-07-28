@@ -1,0 +1,30 @@
+.outer{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+
+}
+.description{
+    max-width:60%;
+    margin-bottom:2rem;
+    
+}
+.image{
+   
+
+}
+.about h1{
+    margin:2rem;
+    font-size:2.5rem;
+    font-weight:bold;
+
+}
+.description img{
+    float: left;
+    width:250px;
+    height:250px;
+    border-radius:50%;
+    margin-right:1.5rem;
+    margin-bottom:1.5rem;
+}
