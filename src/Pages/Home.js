@@ -1,9 +1,25 @@
-import React, { useState,useEffect } from "react";
+import React, { useState,useEffect ,useRef} from "react";
 import classes from "./Home.module.css";
 const Home = () => {
   const [movies, setMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+
+  const titleRef=useRef();
+  const dateRef=useRef();
+  const textRef=useRef();
+
+  const formSubmitHandler=(event)=>{
+    event.preventDefault();
+    const newMovie={
+      title:titleRef.current.value,
+      text:textRef.current.value,
+      date:dateRef.current.value
+    }
+
+    console.log(newMovie);
+
+  }
 
   useEffect(()=>{
     const fetchMovies = async () => {
@@ -43,6 +59,15 @@ const Home = () => {
           <div className={classes["arrow-right"]}></div>{" "}
         </div>
       </div>
+      <form onSubmit={formSubmitHandler}>
+        <label>Title</label>
+        <input type="text" ref={titleRef}></input>
+        <label>Opening text</label>
+        <input type="text" ref={textRef}></input>
+        <label>Release Date</label>
+        <input type="date" ref={dateRef}></input>
+        <button type="submit">Add Movie</button>
+      </form>
       <div>
         {isLoading && <p>Loading......</p>}
         {!isLoading && error && <p> {error}</p>}
