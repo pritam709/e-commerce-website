@@ -5,6 +5,7 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Container from 'react-bootstrap/Container';
 import CartContext from '../store/CartContext';
+import { Link } from 'react-router-dom';
 
 const productsArr = [
   {
@@ -70,7 +71,7 @@ const Music = () => {
       <Row xs={1} md={2} className="g-5">
         {productsArr.map((item, idx) => (
           <Col key={idx}>
-            <Card className="w-25 border-0 offset-4">
+            <Link to={`/store/${item.id}`}><Card  className="w-25 border-0 offset-4">
               <Card.Title className='text-center'>{item.title}</Card.Title>
               <Card.Img variant="top" src={item.imageUrl} />
               <Card.Body>
@@ -79,13 +80,13 @@ const Music = () => {
                   <Button onClick={addItemTocart.bind(null,item)}> Add to Cart</Button>
                 </Card.Text>
               </Card.Body>
-            </Card>
+            </Card></Link>
           </Col>
         ))}
       </Row>
       </Container>
 
-      <div className='d-flex justify-content-center mt-4'><Button className=' fw-bold bg-dark mb-4'> See the Cart</Button></div>
+      <div className='d-flex justify-content-center mt-4 mb-auto'><Button className=' fw-bold bg-dark mb-4'> See the Cart</Button></div>
     </>
   );
 };

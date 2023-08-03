@@ -1,0 +1,43 @@
+.outer{
+    max-width:85%;
+    display:flex;
+    padding:2.5rem;
+    width:80rem;
+    /* background-color:red; */
+    margin:auto;
+}
+.pics-container{
+    min-width:35%;
+    
+}
+.smaller-pics{
+    width:100%;
+    /* background-color:grey; */
+}
+.smaller-pics img{
+   max-width:4rem;
+   margin:0.75rem;
+
+}
+.smaller-pics button{
+    border:none;
+
+}
+.details{
+    padding:2rem;
+    /* background-color:yellow; */
+}
+.main-image{
+   width:20rem;
+   
+}
+.details button {
+    background-color:orange;
+    color:white;
+    font-size:1.5rem;
+    padding:0.5rem 1rem;
+}
+.details button :hover,
+.details button :active{
+    background-color:red;
+}
