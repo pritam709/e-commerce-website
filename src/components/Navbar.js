@@ -39,6 +39,9 @@ function NavbarFn(props) {
            <NavLink className="text-white text-decoration-none"  to="/about"> About</NavLink>
           </Navbar.Brand>
           <Navbar.Brand className="text-white" href="#home">
+           <NavLink className="text-white text-decoration-none"  to="/login"> Login</NavLink>
+          </Navbar.Brand>
+          <Navbar.Brand className="text-white" href="#home">
            <NavLink className="text-white text-decoration-none"  to="/contact"> Contact us</NavLink>
           </Navbar.Brand>
 

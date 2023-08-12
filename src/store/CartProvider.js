@@ -1,8 +1,28 @@
-import React, { useReducer } from "react";
+import React, { useReducer ,useState} from "react";
 import CartContext from "./CartContext";
 
 
 const CartProvider = (props) => {
+
+  const storedToken= localStorage.getItem('token');
+  const[token,setToken]=useState(storedToken);
+
+  const userIsLoggedIn= !!token;
+  const loginHandler=(token)=>{
+     setToken(token);
+     localStorage.setItem('token',token);
+    //  const expiration = new Date();
+    //  console.log(expiration);
+  
+  }
+  const logoutHandler=()=>{
+     setToken(null);
+     localStorage.removeItem('token');
+  }
+
+  
+ 
+
   const defaultCartState = {
     items: [],
     totalAmount: 0,
@@ -54,9 +74,16 @@ const CartProvider = (props) => {
   const removeItemFromCartHandler = (id) => {
     dispatchFn({ type: "REMOVE", id: id });
   };
+
+  
+
   const initialCart = {
     items: cartState.items,
     totalAmount: cartState.totalAmount,
+    token:token,
+    isLoggedIn:userIsLoggedIn,
+    login:loginHandler,
+    logout:logoutHandler,
     addItemTocart: addItemTocartHandler,
     removeItemFromCart: removeItemFromCartHandler,
   };

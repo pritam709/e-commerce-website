@@ -14,6 +14,7 @@ import Footer from "./components/Footer";
 import Home from "./Pages/Home";
 import Contact from "./Pages/Contact";
 import ProductDetail from "./Pages/ProductDetail";
+import Login from "./Pages/Login";
 // import Root from "./Pages/Root";
 // const router = createBrowserRouter([
 //   {
@@ -47,6 +48,9 @@ function App() {
           </Route>
           <Route path="/contact">
             <Contact />
+          </Route>
+          <Route path="/login">
+            <Login />
           </Route>
           <Route path="/store/:prodId">
             <ProductDetail />
