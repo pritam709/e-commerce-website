@@ -1,5 +1,5 @@
-import React from "react";
-import { Route, Switch } from "react-router-dom";
+import React,{useContext} from "react";
+import { Redirect, Route,Switch} from "react-router-dom";
 
 // import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import "./App.css";
@@ -15,6 +15,7 @@ import Home from "./Pages/Home";
 import Contact from "./Pages/Contact";
 import ProductDetail from "./Pages/ProductDetail";
 import Login from "./Pages/Login";
+import CartContext from "./store/CartContext";
 // import Root from "./Pages/Root";
 // const router = createBrowserRouter([
 //   {
@@ -30,19 +31,21 @@ import Login from "./Pages/Login";
 // <RouterProvider router={router} />
 
 function App() {
-  return (
-    <CartProvider>
+ const authCtx= useContext(CartContext);
+ const isLoggedIn=authCtx.isLoggedIn;
+ console.log(isLoggedIn);
+  return (<>
       <NavbarFn />
       <Header />
-      <main>
+      <Switch>
       
-          {" "}
-          <Route path="/" exact>
+         
+          <Route path="/" exact >
             <Home />
           </Route>
-          <Route path="/store" exact>
+          {isLoggedIn && <Route path="/store" >
             <Music />
-          </Route>
+          </Route>}
           <Route path="/about">
             <About />
           </Route>
@@ -55,11 +58,14 @@ function App() {
           <Route path="/store/:prodId">
             <ProductDetail />
           </Route>
+          <Route path="*">
+            <Redirect to="/login" ></Redirect>
+          </Route>
         
-      </main>
+      </Switch>
 
       <Footer />
-    </CartProvider>
+      </>
   );
 }
 

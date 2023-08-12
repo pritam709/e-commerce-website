@@ -5,19 +5,20 @@ import CartContext from "./CartContext";
 const CartProvider = (props) => {
 
   const storedToken= localStorage.getItem('token');
-  const[token,setToken]=useState(storedToken);
-
+  const[token,setToken]=useState(null);
+    console.log(token);
   const userIsLoggedIn= !!token;
+  console.log(userIsLoggedIn);
   const loginHandler=(token)=>{
      setToken(token);
-     localStorage.setItem('token',token);
+    //  localStorage.setItem('token',token);
     //  const expiration = new Date();
-    //  console.log(expiration);
+     console.log(token);
   
   }
   const logoutHandler=()=>{
      setToken(null);
-     localStorage.removeItem('token');
+    //  localStorage.removeItem('token');
   }
 
   

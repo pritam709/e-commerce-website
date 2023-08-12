@@ -1,3 +1,4 @@
+import React from "react"
 import Facebook from "../Icons/Facebook"
 import Spotify from "../Icons/Spotify"
 import Youtube from "../Icons/Youtube"

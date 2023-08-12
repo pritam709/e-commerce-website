@@ -49,9 +49,9 @@ const Music = () => {
  const ctx= useContext(CartContext);
  const addItemTocart=(item)=>{
 
-  console.log("btn-click");
+  // console.log("btn-click");
 
-  console.log({...item,quantity:1});
+  // console.log({...item,quantity:1});
 
   ctx.addItemTocart({...item,quantity:1})
 
