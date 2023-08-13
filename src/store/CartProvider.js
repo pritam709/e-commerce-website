@@ -1,50 +1,58 @@
-import React, { useReducer ,useState} from "react";
+import React, { useReducer, useState } from "react";
 import CartContext from "./CartContext";
 
-
 const CartProvider = (props) => {
+  const storedToken = localStorage.getItem("token");
+  const storedEmail = localStorage.getItem("email");
+  const [token, setToken] = useState(storedToken);
+  const [email, setEmail] = useState(storedEmail);
 
-  const storedToken= localStorage.getItem('token');
-  const[token,setToken]=useState(null);
-    console.log(token);
-  const userIsLoggedIn= !!token;
-  console.log(userIsLoggedIn);
-  const loginHandler=(token)=>{
-     setToken(token);
-    //  localStorage.setItem('token',token);
+  // console.log(token);
+  const userIsLoggedIn = !!token;
+  // console.log(userIsLoggedIn);
+  const loginHandler = (token, email) => {
+    setToken(token);
+    setEmail(email);
+    localStorage.setItem("token", token);
+    localStorage.setItem("email", email);
     //  const expiration = new Date();
-     console.log(token);
-  
-  }
-  const logoutHandler=()=>{
-     setToken(null);
-    //  localStorage.removeItem('token');
-  }
-
-  
- 
+    //  console.log(token);
+  };
+  const logoutHandler = () => {
+    setToken(null);
+     localStorage.removeItem('token');
+     setEmail(null);
+     localStorage.removeItem('email');
+     window.location.reload(true);
+  };
 
   const defaultCartState = {
     items: [],
     totalAmount: 0,
   };
   const cartReducerFn = (state, action) => {
-    console.log("inside Reducer");
+    // console.log("inside Reducer");
     if (action.type === "ADD") {
-      const newAmount = state.totalAmount + action.item.price;
-      const itemIndex = state.items.findIndex((item) => item.id === action.item.id);
+      const itemIndex = state.items.findIndex(
+        (item) => item._id === action.item._id
+      );
       const existingItem = state.items[itemIndex];
       let updatedItemsArray;
-
+      let newAmount;
       if (existingItem) {
-        const updatedItem = {
-          ...existingItem,
-          quantity: existingItem.quantity + 1,
+        return {
+          items: state.items,
+          totalAmount: state.totalAmount,
         };
-        updatedItemsArray = [...state.items];
-        updatedItemsArray[itemIndex] = updatedItem;
+        // const updatedItem = {
+        //   ...existingItem,
+        //   quantity: existingItem.quantity + 1,
+        // };
+        // updatedItemsArray = [...state.items];
+        // updatedItemsArray[itemIndex] = updatedItem;
       } else {
         updatedItemsArray = state.items.concat(action.item);
+        newAmount = state.totalAmount + action.item.price;
       }
 
       return {
@@ -53,38 +61,37 @@ const CartProvider = (props) => {
       };
     }
 
-    if(action.type==="REMOVE"){
-        const newItemsArray=state.items.filter(item=>item.id!==action.id);
-        const newAmount=newItemsArray.reduce((curr,item)=>{
-            return curr+(item.price)*(item.quantity);
-        },0)
+    if (action.type === "REMOVE") {
+      const newItemsArray = state.items.filter((item) => item.id !== action.id);
+      const newAmount = newItemsArray.reduce((curr, item) => {
+        return curr + item.price * item.quantity;
+      }, 0);
 
-        return {
-            items: newItemsArray,
-            totalAmount:newAmount
-        }
+      return {
+        items: newItemsArray,
+        totalAmount: newAmount,
+      };
     }
 
     return defaultCartState;
   };
   const [cartState, dispatchFn] = useReducer(cartReducerFn, defaultCartState);
   const addItemTocartHandler = (item) => {
-    console.log("hello");
+    // console.log("hello");
     dispatchFn({ type: "ADD", item: item });
   };
   const removeItemFromCartHandler = (id) => {
     dispatchFn({ type: "REMOVE", id: id });
   };
 
-  
-
   const initialCart = {
     items: cartState.items,
     totalAmount: cartState.totalAmount,
-    token:token,
-    isLoggedIn:userIsLoggedIn,
-    login:loginHandler,
-    logout:logoutHandler,
+    token: token,
+    email: email,
+    isLoggedIn: userIsLoggedIn,
+    login: loginHandler,
+    logout: logoutHandler,
     addItemTocart: addItemTocartHandler,
     removeItemFromCart: removeItemFromCartHandler,
   };

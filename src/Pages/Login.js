@@ -57,8 +57,22 @@ const Login = () => {
       })
       .then((data) => {
         // console.log(data.idToken);
+        // console.log(data.email);
+        const str= data.email;
+        let newStr="";
+        for(let i=0;i<str.length;i++){
+
+            if(str.charAt(i)==="@" ||str.charAt(i)==="." ){
+                continue;
+            }
+
+            newStr+=str.charAt(i);
+
+        }
+
+        // console.log(newStr);
         const token= data.idToken;
-        authCtx.login(token);
+        authCtx.login(token,newStr);
         history.replace('/store')
 
       })
@@ -67,6 +81,12 @@ const Login = () => {
         alert(err.message);
       });
   };
+
+  const logoutBtnHandler=()=>{
+    
+    authCtx.logout();
+    
+  }
 
   return (
     <section className={classes.auth}>
@@ -93,7 +113,9 @@ const Login = () => {
             {isLogin ? "Create new account" : "Login with existing account"}
           </button>
         </div>
+        
       </form>
+      <button onClick={logoutBtnHandler}>Logout</button>
     </section>
   );
 };

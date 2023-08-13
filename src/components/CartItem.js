@@ -4,8 +4,12 @@ import classes from "./CartItem.module.css"
 import CartContext from "../store/CartContext"
 const CartItem=(props)=>{
    const ctx= useContext(CartContext);
-
+   const mail= ctx.email
+const _id= props._id;
    const removeItemFromCart=(id)=>{
+    fetch("https://crudcrud.com/api/7a413186d2ab4d3b97e779bdab4bac3f/cart" +mail+"/"+_id,{
+        method:"DELETE"
+    }).then(res=>console.log(res))
 ctx.removeItemFromCart(id);
 
     }
